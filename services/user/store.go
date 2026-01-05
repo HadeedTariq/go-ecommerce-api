@@ -57,3 +57,6 @@ func scanRowsIntoUser(rows *sql.Rows) (*types.User, error) {
 
 	return user, nil
 }
+
+func (s *Store) GetUserById(id int) (*types.User, error) {}
+func (s *Store) CreateUser(user types.User) error        {}

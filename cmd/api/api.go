@@ -28,7 +28,10 @@ func (s *ApiServer) Run() error {
 	subRouter := router.PathPrefix("/api/v1").Subrouter()
 
 	// ~ ok so over there the user service is registered for handling the request
-	userService := user.NewHandler()
+
+	// ~ so this is how the depenedency injection works out with in the golang
+	userStore := user.NewStore(s.db)
+	userService := user.NewHandler(userStore)
 	userService.RegisterRoutes(subRouter)
 
 	log.Println("listening on : ", s.addr)
